@@ -1,0 +1,60 @@
+---
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Install aptitude (workaround for older ansible)
+  shell: "apt-get -y install aptitude"
+
+- name: Upgrade all safe packages
+  apt: upgrade=safe
+
+- name: Get the good stuff
+  apt:
+    pkg:
+      - default-jdk
+      - default-jdk-doc
+      - docker.io
+      - build-essential
+      - irssi
+      - vagrant
+      - virtualbox
+      - openssh-server
+      - vim
+      - git
+      - ttf-mscorefonts-installer
+      - xubuntu-desktop
+      - xubuntu-restricted-extras
+      - xrdp
+      - keepassxc
+      - terminator
+      - snapd
+
+- name: Install yakyak and caprine snaps
+  shell: "snap install yakyak && snap install caprine"
+
+- name: Install slack snap
+  shell: "snap install slack --classic"
+
+- name: Get pycharm
+  get_url:
+    url: "https://download.jetbrains.com/python/pycharm-community-2018.3.5.tar.gz"
+    dest: /home/vagrant
+  
+- name: Install pycharm
+  shell: "tar -C /usr/local/bin -xvf /home/vagrant/pycharm*.tar.gz"
+
+- name: Get IntelliJ IDEA
+  get_url:
+    url: "https://download.jetbrains.com/idea/ideaIC-2018.3.5.tar.gz"
+    dest: /home/vagrant
+
+- name: Install IntelliJ IDEA
+  shell: "tar -C /usr/local/bin -xvf /home/vagrant/idea*.tar.gz"
+
+- name: Fix up .xsession
+  shell: "echo 'startxfce' > /home/vagrant/.xsession"
+
+- name: Fix xrdp
+  shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
+
+  become: yes
