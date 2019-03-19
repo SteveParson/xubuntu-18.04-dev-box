@@ -52,7 +52,7 @@
   shell: "tar -C /usr/local/bin -xvf /home/vagrant/idea*.tar.gz"
 
 - name: Fix up .xsession
-  shell: "echo 'startxfce' > /home/vagrant/.xsession"
+  shell: "echo 'startxfce4' > /home/vagrant/.xsession"
 
 - name: Fix xrdp
   shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
