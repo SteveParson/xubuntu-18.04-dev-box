@@ -2,8 +2,8 @@
 Produce a throwaway fresh install of Xubuntu 18.04 with RDP, with a Vagrant-managed, Ansible-provisioned virtual machine.
 
 Requires:
-- Vagrant
-- Virtualbox
+- Vagrant 2.x
+- Virtualbox 5.x
 - RDP client of your choice
 
 Adds the following extra apt packages:
@@ -31,8 +31,8 @@ Adds the following snap packages:
 - yakyak (Google Hangouts)
 
 Adds the following IDEs:
-- Pycharm CE 2018.3.5 in /usr/local/bin 
-- IntelliJ IDEA CE 2018.3.5 in /usr/local/bin
+- Pycharm CE 2018.3.5 in `/usr/local/bin`
+- IntelliJ IDEA CE 2018.3.5 in `/usr/local/bin`
 
 Build the VM:
 - `vagrant up` will do the dirty work
