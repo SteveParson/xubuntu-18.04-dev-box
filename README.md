@@ -6,15 +6,24 @@ Requires:
 - Virtualbox 5.x
 - RDP client of your choice
 
-Adds the following extra apt packages:
+Adds the following extra packages:
+- ansible
+- awscli (via pip)
+- azure-cli
 - build-essential
+- caprine (via snap)
+- code
 - default-jdk
 - default-jdk-doc
 - docker.io
-- irssi
-- openssh-server
 - git
+- hexchat
+- irssi
 - keepassxc
+- kubectl
+- openssh-server
+- python-pip
+- slack (via snap)
 - snapd
 - terminator
 - ttf-mscorefonts-installer
@@ -24,15 +33,11 @@ Adds the following extra apt packages:
 - xrdp
 - xubuntu-desktop
 - xubuntu-restricted-extras
-
-Adds the following snap packages:
-- caprine (Fakebook Messenger)
-- slack
-- yakyak (Google Hangouts)
+- yakyak (via snap)
 
 Adds the following IDEs:
-- Pycharm CE 2018.3.5 in `/usr/local/bin`
-- IntelliJ IDEA CE 2018.3.5 in `/usr/local/bin`
+- Pycharm CE 2019.1 in `/usr/local/bin`
+- IntelliJ IDEA CE 2019.1 in `/usr/local/bin`
 
 Build the VM:
 - `vagrant up` will do the dirty work

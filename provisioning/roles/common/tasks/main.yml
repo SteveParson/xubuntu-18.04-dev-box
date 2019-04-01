@@ -8,26 +8,68 @@
 - name: Upgrade all safe packages
   apt: upgrade=safe
 
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Add Kubernetes GPG key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Install Microsoft GPG key
+  apt_key:
+    url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    state: present
+
+- name: Install VSCode Repo
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    filename: vscode
+    state: present
+
+- name: Install Azure CLI Repo
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli bionic main
+    filename: az
+    state: present
+
+- name: Add Kubernetes APT repos
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: kubernetes
+
 - name: Get the good stuff
   apt:
     pkg:
+      - azure-cli
+      - build-essential
+      - code
       - default-jdk
       - default-jdk-doc
       - docker.io
-      - build-essential
-      - irssi
-      - vagrant
-      - virtualbox
-      - openssh-server
-      - vim
       - git
+      - hexchat
+      - irssi
+      - keepassxc
+      - kubectl
+      - openssh-server
+      - python-pip
+      - snapd
+      - terminator
       - ttf-mscorefonts-installer
+      - vagrant
+      - vim
+      - virtualbox
+      - xrdp
       - xubuntu-desktop
       - xubuntu-restricted-extras
-      - xrdp
-      - keepassxc
-      - terminator
-      - snapd
+
+- name: Install awscli
+  pip:
+    name: awscli
 
 - name: Install yakyak and caprine snaps
   shell: "snap install yakyak && snap install caprine"
@@ -37,7 +79,7 @@
 
 - name: Get pycharm
   get_url:
-    url: "https://download.jetbrains.com/python/pycharm-community-2018.3.5.tar.gz"
+    url: "https://download.jetbrains.com/python/pycharm-community-2019.1.tar.gz"
     dest: /home/vagrant
   
 - name: Install pycharm
@@ -45,7 +87,7 @@
 
 - name: Get IntelliJ IDEA
   get_url:
-    url: "https://download.jetbrains.com/idea/ideaIC-2018.3.5.tar.gz"
+    url: "https://download.jetbrains.com/idea/ideaIC-2019.1.tar.gz"
     dest: /home/vagrant
 
 - name: Install IntelliJ IDEA
@@ -56,5 +98,4 @@
 
 - name: Fix xrdp
   shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
-
   become: yes
