@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
   config.vm.box           = "geerlingguy/ubuntu1804"
   config.vm.hostname      = "xubuntu"
   config.vm.network         "private_network", type: "dhcp"
-    
+  config.vm.network         "forwarded_port", guest: 3389, host:3389    
   config.vm.provider :virtualbox do |v|
     v.memory = 4096
     v.cpus = 2
