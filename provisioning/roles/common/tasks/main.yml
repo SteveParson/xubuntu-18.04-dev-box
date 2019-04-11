@@ -71,31 +71,52 @@
   pip:
     name: awscli
 
-- name: Install yakyak and caprine snaps
-  shell: "snap install yakyak && snap install caprine"
+- name: Install git-interactive-rebase-tool
+  apt:
+    deb: "https://github.com/MitMaro/git-interactive-rebase-tool/releases/download/1.0.0-rc.3/git-interactive-rebase-tool_1.0.0_amd64.deb"
 
-- name: Install slack snap
-  shell: "snap install slack --classic"
+- name: Configure git-interactive-rebase-tool
+  shell: "git config --global sequence.editor interactive-rebase-tool"
+  become: yes
+  become_user: vagrant
 
-- name: Get pycharm
-  get_url:
-    url: "https://download.jetbrains.com/python/pycharm-community-2019.1.tar.gz"
-    dest: /home/vagrant
-  
-- name: Install pycharm
-  shell: "tar -C /usr/local/bin -xvf /home/vagrant/pycharm*.tar.gz"
+- name: Install kops
+  shell: "curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '\"' -f 4)/kops-linux-amd64 && chmod +x ./kops && sudo mv ./kops /usr/local/bin/"
+  become: yes
 
-- name: Get IntelliJ IDEA
-  get_url:
-    url: "https://download.jetbrains.com/idea/ideaIC-2019.1.tar.gz"
-    dest: /home/vagrant
+- name: Install caprine, discord, slack and yakyak snaps
+  shell: |
+    snap install caprine
+    snap install discord
+    snap install yayak
+    snap install slack --classic
 
-- name: Install IntelliJ IDEA
-  shell: "tar -C /usr/local/bin -xvf /home/vagrant/idea*.tar.gz"
-
-- name: Fix up .xsession
-  shell: "echo 'startxfce4' > /home/vagrant/.xsession"
+- name: Make it xubuntu
+  shell: |
+    echo 'xfce4-session' > ~/.xsession
+    cp -R /etc/xdg/xdg-xubuntu/* ~/.config
+  become: yes
+  become_user: vagrant
 
 - name: Fix xrdp
   shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
   become: yes
+
+- name: Create local .bin
+  shell: mkdir ~/.bin
+  become: yes
+  become_user: vagrant
+
+- name: Get and install Pycharm
+  shell: |
+    wget https://download.jetbrains.com/python/pycharm-community-2019.1.tar.gz
+    tar -C ~/.bin -xvf ~/pycharm*.tar.gz
+  become: yes
+  become_user: vagrant
+  
+- name: Get and install IntelliJ IDEA
+  shell: |
+    wget https://download.jetbrains.com/idea/ideaIC-2019.1.tar.gz
+    tar -C ~/.bin -xvf ~/idea*.tar.gz
+  become: yes
+  become_user: vagrant
