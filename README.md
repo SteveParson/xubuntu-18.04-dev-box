@@ -15,11 +15,14 @@ Adds the following extra packages:
 - code
 - default-jdk
 - default-jdk-doc
+- discord
 - docker.io
 - git
+- [git-interactive-rebase-tool](https://github.com/MitMaro/git-interactive-rebase-tool) (thanks Tim)
 - hexchat
 - irssi
 - keepassxc
+- kops
 - kubectl
 - openssh-server
 - python-pip
@@ -36,8 +39,8 @@ Adds the following extra packages:
 - yakyak (via snap)
 
 Adds the following IDEs:
-- Pycharm CE 2019.1 in `/usr/local/bin`
-- IntelliJ IDEA CE 2019.1 in `/usr/local/bin`
+- Pycharm CE 2019.1 in `/home/vagrant/.bin`
+- IntelliJ IDEA CE 2019.1 in `/home/vagrant/.bin`
 
 Build the VM:
 - `vagrant up` will do the dirty work

@@ -27,6 +27,3 @@ Vagrant.configure("2") do |config|
     :inline => "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/provisioning && bash init.sh"
 
 end
-
-
-

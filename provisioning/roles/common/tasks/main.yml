@@ -73,7 +73,7 @@
 
 - name: Install git-interactive-rebase-tool
   apt:
-    deb: "https://github.com/MitMaro/git-interactive-rebase-tool/releases/download/1.0.0-rc.3/git-interactive-rebase-tool_1.0.0_amd64.deb"
+    deb: "https://github.com/MitMaro/git-interactive-rebase-tool/releases/download/1.0.0/git-interactive-rebase-tool_1.0.0_amd64.deb"
 
 - name: Configure git-interactive-rebase-tool
   shell: "git config --global sequence.editor interactive-rebase-tool"
