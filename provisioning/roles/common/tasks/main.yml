@@ -108,16 +108,22 @@
   become: yes
   become_user: vagrant
 
-# - name: Get and install Pycharm
-#   shell: |
-#     wget https://download.jetbrains.com/python/pycharm-community-2019.1.tar.gz
-#     tar -C ~/.bin -xvf ~/pycharm*.tar.gz
-#   become: yes
-#   become_user: vagrant
+- name: Get pycharm
+  get_url:
+    url: "https://download.jetbrains.com/python/pycharm-community-2019.1.tar.gz"
+    dest: /home/vagrant
   
-# - name: Get and install IntelliJ IDEA
-#   shell: |
-#     wget https://download.jetbrains.com/idea/ideaIC-2019.1.tar.gz
-#     tar -C ~/.bin -xvf ~/idea*.tar.gz
-#   become: yes
-#   become_user: vagrant
+- name: Install pycharm
+  shell: "tar -C ~/.bin -xvf /home/vagrant/pycharm*.tar.gz"
+  become: yes
+  become_user: vagrant
+
+- name: Get IntelliJ IDEA
+  get_url:
+    url: "https://download.jetbrains.com/idea/ideaIC-2019.1.tar.gz"
+    dest: /home/vagrant
+
+- name: Install IntelliJ IDEA
+  shell: "tar -C ~/.bin -xvf /home/vagrant/idea*.tar.gz"
+  become: yes
+  become_user: vagrant
