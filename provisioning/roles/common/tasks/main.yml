@@ -134,3 +134,12 @@
   shell: "tar -C ~/.bin -xvf /home/vagrant/idea*.tar.gz"
   become: yes
   become_user: vagrant
+
+- name: Add local user to extra groups 
+  user:
+    name: vagrant
+    groups:
+        - docker
+        - sudo
+        - vboxusers
+    append: yes
