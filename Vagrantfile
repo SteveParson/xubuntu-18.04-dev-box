@@ -1,9 +1,11 @@
-def local_cache(basebox_name)
-  cache_dir = Vagrant::Environment.new.home_path.join('cache', 'apt', basebox_name)
-  partial_dir = cache_dir.join('partial')
-  partial_dir.mkdir unless partial_dir.exist?
-  cache_dir
-end
+# # Host-based apt cache -> requires ~/.vagrant.d/cache/apt/geerlingguy/ubuntu1804/partial to exist on host
+# # Makes testing easier
+# def local_cache(basebox_name)
+#   cache_dir = Vagrant::Environment.new.home_path.join('cache', 'apt', basebox_name)
+#   partial_dir = cache_dir.join('partial')
+#   partial_dir.mkdir unless partial_dir.exist?
+#   cache_dir
+# end
 
 Vagrant.configure("2") do |config|
   config.vm.box           = "geerlingguy/ubuntu1804"
@@ -15,9 +17,10 @@ Vagrant.configure("2") do |config|
     v.cpus = 2
   end
   
-  cache_dir = local_cache(config.vm.box)  
-  config.vm.synced_folder cache_dir, 
-                         "/var/cache/apt/archives/"
+  # # Host-based apt cache
+  # cache_dir = local_cache(config.vm.box)  
+  # config.vm.synced_folder cache_dir, 
+  #                        "/var/cache/apt/archives/"
                          
   # Thanks Rob Allen -> https://dzone.com/articles/provisioning-ansible-within
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
