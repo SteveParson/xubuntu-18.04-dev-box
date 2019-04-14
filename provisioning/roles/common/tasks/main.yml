@@ -131,7 +131,7 @@
   become_user: vagrant
 
 - name: Change Pycharm folder to static name
-  shell: "mv ~/.bin/pycharm* ~/.bin/idea"
+  shell: "mv ~/.bin/pycharm* ~/.bin/pycharm"
   become: yes
   become_user: vagrant
 
