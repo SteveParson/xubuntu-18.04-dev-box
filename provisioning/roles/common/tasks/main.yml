@@ -115,6 +115,11 @@
   become: yes
   become_user: vagrant
 
+- name: Create Desktop folder
+  shell: mkdir ~/Desktop
+  become: yes
+  become_user: vagrant
+
 - name: Get pycharm
   get_url:
     url: "https://download.jetbrains.com/python/pycharm-community-2019.1.tar.gz"
@@ -125,6 +130,28 @@
   become: yes
   become_user: vagrant
 
+- name: Change Pycharm folder to static name
+  shell: "mv ~/.bin/pycharm* ~/.bin/idea"
+  become: yes
+  become_user: vagrant
+
+- name: Add link to Pycharm on Desktop
+  shell: |
+    echo \"[Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=Pycharm
+    Comment=
+    Exec=/home/vagrant/.bin/pycharm/bin/pycharm.sh
+    Icon=/home/vagrant/.bin/pycharm/bin/pycharm.svg
+    Path=/home/vagrant/.bin/pycharm/bin
+    Terminal=false
+    StartupNotify=false
+    \" > /home/vagrant/Desktop/Pycharm.desktop
+    chmod +x /home/vagrant/Desktop/Pycharm.desktop
+  become: yes
+  become_user: vagrant
+
 - name: Get IntelliJ IDEA
   get_url:
     url: "https://download.jetbrains.com/idea/ideaIC-2019.1.tar.gz"
@@ -132,6 +159,28 @@
 
 - name: Install IntelliJ IDEA
   shell: "tar -C ~/.bin -xvf /home/vagrant/idea*.tar.gz"
+  become: yes
+  become_user: vagrant
+
+- name: Change IntelliJ IDEA folder to static name
+  shell: "mv ~/.bin/idea* ~/.bin/idea"
+  become: yes
+  become_user: vagrant
+
+- name: Add link to IntelliJ IDEA on Desktop
+  shell: |
+    echo \"[Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=IntelliJ IDEA
+    Comment=
+    Exec=/home/vagrant/.bin/idea/bin/idea.sh
+    Icon=/home/vagrant/.bin/idea/bin/idea.svg
+    Path=/home/vagrant/.bin/idea/bin
+    Terminal=false
+    StartupNotify=false
+    \" > /home/vagrant/Desktop/IntelliJ\ IDEA.desktop
+    chmod +x /home/vagrant/Desktop/IntelliJ\ IDEA.desktop
   become: yes
   become_user: vagrant
 
