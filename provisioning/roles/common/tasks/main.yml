@@ -93,6 +93,11 @@
     snap install yayak
     snap install slack --classic
 
+- name: Fix light-locker crash
+  apt:
+    name: light-locker
+    state: absent
+
 - name: Make it xubuntu
   shell: |
     mkdir ~/.config
