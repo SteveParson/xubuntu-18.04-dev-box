@@ -1,0 +1,10 @@
+[Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=IntelliJ IDEA
+    Comment=
+    Exec=/home/vagrant/.bin/idea/bin/idea.sh
+    Icon=/home/vagrant/.bin/idea/bin/idea.svg
+    Path=/home/vagrant/.bin/idea/bin
+    Terminal=false
+    StartupNotify=false

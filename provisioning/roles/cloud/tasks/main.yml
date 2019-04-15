@@ -1,0 +1,39 @@
+---
+- name: Install Microsoft GPG key
+  apt_key:
+    url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    state: present
+
+- name: Install Azure CLI Repo
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli bionic main
+    filename: az
+    state: present
+
+- name: Add Kubernetes GPG key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add Kubernetes APT repos
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: kubernetes
+
+- name: Install cloud-related packages
+  apt:
+    pkg:
+      - azure-cli
+      - kubectl
+      - python-pip
+
+- name: Install awscli
+  pip:
+    name: awscli
+
+- name: Install kops
+  shell: |
+    wget -qO ./kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+    chmod +x ./kops
+    mv ./kops /usr/local/bin/

@@ -1,0 +1,17 @@
+- name: Install virtualization packages
+  apt:
+    pkg:
+      - docker.io
+      - vagrant
+      - virtualbox
+      - virt-manager
+      - qemu
+
+- name: "Add user {{ user }} to extra groups"
+  user:
+    name: "{{ user }}"
+    groups:
+        - docker
+        - libvirt
+        - vboxusers
+    append: yes

@@ -1,0 +1,14 @@
+---
+- name: Get the good stuff
+  apt:
+    pkg:
+      - hexchat
+      - irssi
+      - snapd
+
+- name: Install caprine, discord, slack and yakyak snaps
+  shell: |
+    snap install caprine
+    snap install discord
+    snap install yayak
+    snap install slack --classic

@@ -1,0 +1,24 @@
+---
+- name: Install xrdp and openssh-server
+  apt:
+    pkg:
+      - openssh-server
+      - xrdp
+
+- name: Fix light-locker crash
+  apt:
+    name: light-locker
+    state: absent
+
+- name: Make it xubuntu
+  shell: |
+    mkdir ~/.config
+    echo 'xfce4-session' > ~/.xsession
+    cp -R /etc/xdg/xdg-xubuntu/* ~/.config
+  become: yes
+  become_user: "{{ user }}"
+
+
+- name: Fix xrdp.ini
+  shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
+  become: yes

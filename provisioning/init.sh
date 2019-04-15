@@ -15,7 +15,7 @@ fi
 
 cd /vagrant/provisioning
 echo "Running playbook"
-ansible-playbook -i hosts site.yml --connection=local
+ansible-playbook -i hosts site.yml --connection=local --extra-vars "user=vagrant"
 
 IP=`hostname -I | cut -d' ' -f2`
 echo "** Xubuntu box deployed at ${IP}, rebooting now"

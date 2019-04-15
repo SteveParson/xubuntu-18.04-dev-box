@@ -1,0 +1,68 @@
+---
+- name: Install Microsoft GPG key
+  apt_key:
+    url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    state: present
+
+- name: Install VSCode Repo
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    filename: vscode
+    state: present
+
+- name: Install development packages
+  apt:
+    pkg:
+      - build-essential
+      - code
+      - default-jdk
+      - default-jdk-doc
+      - git
+      - kubectl
+      - python-pip
+      - vim
+
+- name: Install git-interactive-rebase-tool
+  apt:
+    deb: "https://github.com/MitMaro/git-interactive-rebase-tool/releases/download/1.0.0/git-interactive-rebase-tool_1.0.0_amd64.deb"
+
+- name: Configure git-interactive-rebase-tool
+  shell: "git config --global sequence.editor interactive-rebase-tool"
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Get pycharm
+  get_url:
+    url: "https://download.jetbrains.com/python/pycharm-community-2019.1.tar.gz"
+    dest: /home/{{ user }}
+  
+- name: Install pycharm
+  shell: "tar -C ~/.bin -xvf /home/{{ user }}/pycharm*.tar.gz"
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Change Pycharm folder to static name
+  shell: "mv ~/.bin/pycharm* ~/.bin/pycharm"
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Add link to Pycharm on Desktop
+  copy: src=Pycharm.desktop dest=/home/{{ user }}/Desktop/Pycharm.desktop owner={{ user }} group={{ user }} mode=0777
+
+- name: Get IntelliJ IDEA
+  get_url:
+    url: "https://download.jetbrains.com/idea/ideaIC-2019.1.tar.gz"
+    dest: /home/{{ user }}
+
+- name: Install IntelliJ IDEA
+  shell: "tar -C ~/.bin -xvf /home/{{ user }}/idea*.tar.gz"
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Change IntelliJ IDEA folder to static name
+  shell: "mv ~/.bin/idea* ~/.bin/idea"
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Add link to IntelliJ IDEA on Desktop
+  copy: src=IDEA.desktop dest=/home/{{ user }}/Desktop/IDEA.desktop owner={{ user }} group={{ user }} mode=0777

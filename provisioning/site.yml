@@ -5,4 +5,9 @@
   gather_facts: True
   roles:
     - common
-
+    - cloud
+    - communication
+    - devel
+    - rdp
+    - virtualization
+    

@@ -1,0 +1,10 @@
+[Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=Pycharm
+    Comment=
+    Exec=/home/vagrant/.bin/pycharm/bin/pycharm.sh
+    Icon=/home/vagrant/.bin/pycharm/bin/pycharm.svg
+    Path=/home/vagrant/.bin/pycharm/bin
+    Terminal=false
+    StartupNotify=false
