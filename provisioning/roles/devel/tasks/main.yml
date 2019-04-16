@@ -46,8 +46,9 @@
   become: yes
   become_user: "{{ user }}"
 
-- name: Add link to Pycharm on Desktop
-  copy: src=Pycharm.desktop dest=/home/{{ user }}/Desktop/Pycharm.desktop owner={{ user }} group={{ user }} mode=0777
+# TODO: Can't assume anything about the group of the user
+#- name: Add link to Pycharm on Desktop
+#  copy: src=Pycharm.desktop dest=/home/{{ user }}/Desktop/Pycharm.desktop owner={{ user }} group={{ user }} mode=0777
 
 - name: Get IntelliJ IDEA
   get_url:
@@ -64,5 +65,6 @@
   become: yes
   become_user: "{{ user }}"
 
-- name: Add link to IntelliJ IDEA on Desktop
-  copy: src=IDEA.desktop dest=/home/{{ user }}/Desktop/IDEA.desktop owner={{ user }} group={{ user }} mode=0777
+# TODO: Can't assume anything about the group of the user
+#- name: Add link to IntelliJ IDEA on Desktop
+#  copy: src=IDEA.desktop dest=/home/{{ user }}/Desktop/IDEA.desktop owner={{ user }} group={{ user }} mode=0777
