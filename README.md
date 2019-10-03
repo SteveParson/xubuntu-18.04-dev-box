@@ -39,8 +39,8 @@ Adds the following extra packages:
 - yakyak (via snap)
 
 Adds the following IDEs:
-- Pycharm CE 2019.1 in `/home/vagrant/.bin`
-- IntelliJ IDEA CE 2019.1 in `/home/vagrant/.bin`
+- Pycharm CE (via snap)
+- IntelliJ IDEA CE (via snap)
 
 Build the VM:
 - `vagrant up` will do the dirty work

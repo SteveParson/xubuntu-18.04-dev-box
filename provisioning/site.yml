@@ -4,10 +4,9 @@
   become: True
   gather_facts: True
   roles:
-    - common
-    - cloud
-    - communication
-    - devel
-    - rdp
-    - virtualization
-    
+    - { role: common, tags: common }
+    - { role: cloud, tags: cloud }
+    - { role: communication, tags: communication }
+    - { role: devel, tags: devel }
+    - { role: rdp, tags: rdp }
+    - { role: virtualization, tags: virtualization }

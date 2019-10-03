@@ -3,7 +3,9 @@
   apt: update_cache=yes
 
 - name: Install aptitude (workaround for older ansible)
-  shell: "apt-get -y install aptitude"
+  package:
+    name: aptitude
+    state: present
 
 - name: Upgrade all safe packages
   apt: upgrade=safe
@@ -23,13 +25,11 @@
       - xubuntu-desktop
       - xubuntu-restricted-extras
 
-- name: Create local .bin
-  shell: mkdir ~/.bin
-  become: yes
-  become_user: "{{ user }}"
-
-- name: Create Desktop folder
-  shell: mkdir ~/Desktop
+- name: Create Desktop directory if it does not exist
+  file:
+    path: ~/Desktop
+    state: directory
+    mode: '0755'
   become: yes
   become_user: "{{ user }}"
 

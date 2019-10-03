@@ -10,23 +10,34 @@
     name: light-locker
     state: absent
 
+
 - name: Make it xubuntu
-  shell: |
-    mkdir ~/.config
-    echo 'xfce4-session' > ~/.xsession
-    cp -R /etc/xdg/xdg-xubuntu/* ~/.config
+  file:
+    path: ~/.config
+    state: directory
+    mode: '0755'
+  become: yes
+  become_user: "{{ user }}"
+
+- name: add xfce4-session line to ~/.xsession file
+  lineinfile:
+    path: ~/.xsession
+    line: 'xfce4-session'
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Copy xdg config files to ~/.config    
+  copy:
+    src: /etc/xdg/xdg-xubuntu/
+    dest: ~/.config
+    remote_src: yes
   become: yes
   become_user: "{{ user }}"
 
 - name: Fix xrdp.ini
   lineinfile:
-    dest: /etc/xrdp/xrdp.ini
+    path: /etc/xrdp/xrdp.ini
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
     - { regexp: '^new_cursors', line: 'new_cursors=false' }
-
-
-#- name: Fix xrdp.ini
-#  shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
-#  become: yes
