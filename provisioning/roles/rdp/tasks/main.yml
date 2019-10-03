@@ -18,7 +18,15 @@
   become: yes
   become_user: "{{ user }}"
 
-
 - name: Fix xrdp.ini
-  shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
-  become: yes
+  lineinfile:
+    dest: /etc/xrdp/xrdp.ini
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^new_cursors', line: 'new_cursors=false' }
+
+
+#- name: Fix xrdp.ini
+#  shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
+#  become: yes
