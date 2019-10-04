@@ -35,9 +35,7 @@
   become_user: "{{ user }}"
 
 - name: Fix xrdp.ini
-  lineinfile:
+  replace: 
     path: /etc/xrdp/xrdp.ini
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-  with_items:
-    - { regexp: '^new_cursors', line: 'new_cursors=false' }
+    regexp: 'new_cursors=true'
+    replace: 'new_cursors=false'
