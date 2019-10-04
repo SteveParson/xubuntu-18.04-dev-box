@@ -27,6 +27,7 @@
       - azure-cli
       - kubectl
       - python-pip
+      - python-jmespath
 
 - name: Install awscli
   pip:
