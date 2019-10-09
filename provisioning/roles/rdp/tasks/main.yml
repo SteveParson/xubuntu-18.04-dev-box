@@ -20,5 +20,7 @@
 
 
 - name: Fix xrdp.ini
-  shell: "sed -i 's/new_cursors=true/new_cursors=false/g' /etc/xrdp/xrdp.ini"
-  become: yes
+  replace: 
+    path: /etc/xrdp/xrdp.ini
+    regexp: 'new_cursors=true'
+    replace: 'new_cursors=false'
