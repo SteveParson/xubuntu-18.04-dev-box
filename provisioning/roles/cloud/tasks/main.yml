@@ -27,23 +27,11 @@
       - azure-cli
       - kubectl
       - python-pip
-      - python-jmespath
-
 - name: Install awscli
   pip:
-    name: awscli
-
-- name: Construct part of kops url
-  uri:
-    url: https://api.github.com/repos/kubernetes/kops/releases/latest
-    method: GET
-    return_content: yes
-    body_format: json
-  register: dummy_var
-  tags: test1
-
+    name: awscli 
 - name: Install kops
-  get_url:
-    url: https://github.com/kubernetes/kops/releases/download/{{ dummy_var | json_query('json.tag_name') }}/kops-linux-amd64
-    dest: /usr/local/bin/kops
-    mode: +x
+  shell: |
+    wget -qO ./kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+    chmod +x ./kops
+    mv ./kops /usr/local/bin/

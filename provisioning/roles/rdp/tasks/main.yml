@@ -19,6 +19,13 @@
   become: yes
   become_user: "{{ user }}"
 
+- name: Make sure the file ~/.xsession exists
+  file:
+    path: ~/.xsession
+    state: touch
+  become: yes
+  become_user: "{{ user }}"
+
 - name: add xfce4-session line to ~/.xsession file
   lineinfile:
     path: ~/.xsession
