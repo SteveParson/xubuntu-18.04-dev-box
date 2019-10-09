@@ -29,11 +29,11 @@
   become_user: "{{ user }}"
 
 - name: Create Desktop folder
-  shell: path=~/Desktop state=directory mode=0755
+  file: path=~/Desktop state=directory mode=0755
   become: yes
   become_user: "{{ user }}"
 
-- name: Add local user to extra groups 
+- name: Add local user to extra groups
   user:
     name: "{{ user }}"
     groups:
