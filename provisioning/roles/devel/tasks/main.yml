@@ -35,6 +35,7 @@
   get_url:
     url: "https://download.jetbrains.com/python/pycharm-community-2019.1.tar.gz"
     dest: /home/{{ user }}
+    force: no
   
 - name: Install pycharm
   shell: "tar -C ~/.bin -xvf /home/{{ user }}/pycharm*.tar.gz"
@@ -43,6 +44,8 @@
 
 - name: Change Pycharm folder to static name
   shell: "mv ~/.bin/pycharm* ~/.bin/pycharm"
+  args:
+    creates: ~/.bin/pycharm
   become: yes
   become_user: "{{ user }}"
 
@@ -54,14 +57,19 @@
   get_url:
     url: "https://download.jetbrains.com/idea/ideaIC-2019.1.tar.gz"
     dest: /home/{{ user }}
+    force: no
 
 - name: Install IntelliJ IDEA
   shell: "tar -C ~/.bin -xvf /home/{{ user }}/idea*.tar.gz"
+  args:
+    creates: ~/.bin/idea
   become: yes
   become_user: "{{ user }}"
 
 - name: Change IntelliJ IDEA folder to static name
   shell: "mv ~/.bin/idea* ~/.bin/idea"
+  args:
+    creates: ~/.bin/idea
   become: yes
   become_user: "{{ user }}"
 
