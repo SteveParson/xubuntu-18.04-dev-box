@@ -3,7 +3,9 @@
   apt: update_cache=yes
 
 - name: Install aptitude (workaround for older ansible)
-  shell: "apt-get -y install aptitude"
+  package:
+    name: aptitude
+    state: present
 
 - name: Upgrade all safe packages
   apt: upgrade=safe

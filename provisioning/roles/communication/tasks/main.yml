@@ -6,9 +6,14 @@
       - irssi
       - snapd
 
-- name: Install caprine, discord, slack and yakyak snaps
-  shell: |
-    snap install caprine
-    snap install discord
-    snap install yayak
-    snap install slack --classic
+
+- name: Install Caprine, Discord, and Yakyak snaps
+  snap:
+    name: "{{ item.name }}"
+    state: present
+    classic: "{{ item.classic }}"
+  with_items:
+    - { name: caprine, classic: no }
+    - { name: discord, classic: no }
+    - { name: yakyak, classic: no }
+    - { name: slack, classic: yes }
