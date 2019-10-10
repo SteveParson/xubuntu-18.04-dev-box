@@ -1,17 +1,26 @@
+- name: Set debconf for virtualbox-ext-pack
+  debconf:
+    name: virtualbox-ext-pack
+    question: virtualbox-ext-pack/license
+    value: "true"
+    vtype: boolean
+
 - name: Install virtualization packages
   apt:
     pkg:
       - docker.io
-      - vagrant
-      - virtualbox
-      - virt-manager
       - qemu
+      - vagrant
+      - virt-manager
+      - virtualbox
+      - virtualbox-ext-pack
+      - virtualbox-guest-additions-iso
 
 - name: "Add user {{ user }} to extra groups"
   user:
     name: "{{ user }}"
     groups:
-        - docker
-        - libvirt
-        - vboxusers
+      - docker
+      - libvirt
+      - vboxusers
     append: yes
